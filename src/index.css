@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #353f50;
+  border: 3px solid #0a192f;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #43597e;
+}
+
+.swiper-slide {
+  width: auto;
+}
