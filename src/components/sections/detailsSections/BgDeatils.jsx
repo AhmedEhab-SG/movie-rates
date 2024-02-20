@@ -8,7 +8,6 @@ const BgDeatils = (props) => {
   const isInViewBackground = useInView(backgroundRef);
 
   const details = props.details;
-  console.log(details);
 
   return (
     <Box
