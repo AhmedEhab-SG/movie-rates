@@ -1,6 +1,7 @@
 import { Container, Box } from "@mui/material";
 
 const TrailerDetails = (props) => {
+  console.log(props.videos);
   const embedYtElement = props.videos.map((video) => {
     return (
       <Box
@@ -19,9 +20,9 @@ const TrailerDetails = (props) => {
             width: "inherit",
             height: "inherit",
             maxWidth: "inherit",
+            border: "0",
           }}
           src={`https://www.youtube.com/embed/${video.key}`}
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
