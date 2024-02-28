@@ -1,8 +1,22 @@
-# React + Vite
+<!-- <div align="center"><img style="width:16%" src="./public/images/red-logo.png"/></div> -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Movies-Watchlist</h1>
 
-Currently, two official plugins are available:
+### About Project:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### A React app that allows users to search for popular, top-rated, and upcoming movies or TV shows. Users can also store their favorites for future reference.
+
+### Made with:
+
+» React.Js <br>
+» Material-Ui <br>
+» Redux <br>
+» Axios <br>
+» Swiper <br>
+» IndexedDb <br>
+
+<!-- Live Link: <a href="https://clothes-store-ng-not-real-site.vercel.app/">Clothes Store.ng</a> -->
+
+<!-- <h1 align="center" >
+<img src="./public/images/rent-home.png" alt="rent-Home">
+</h1> -->
