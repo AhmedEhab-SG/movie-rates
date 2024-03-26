@@ -52,13 +52,13 @@ const getSimilar = (type, id) => {
 
 const search = (type, query) => {
   const url = `${apiTypes.category[type]}`;
-  return axiosInstance.get(url, query);
+  return axiosInstance.post(url, query);
 };
 
 export {
+  apiTypes,
   getAllList,
   getVideosById,
-  apiTypes,
   getDetailsById,
   getCreditsById,
   getSimilar,

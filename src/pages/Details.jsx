@@ -2,7 +2,9 @@ import { Fragment, useEffect, useState } from "react";
 import { getCreditsById, getDetailsById, getVideosById } from "../api/movies";
 import { useParams } from "react-router-dom";
 import HeroDetails from "../components/sections/detailsSections/HeroDetails";
-import TrailerDetails from "../components/sections/detailsSections/trailerDetails";
+
+import Loading from "./Loading";
+import TrailerDetails from "../components/sections/detailsSections/TrailerDetails";
 
 const Details = () => {
   const [details, setDetails] = useState();
@@ -28,7 +30,9 @@ const Details = () => {
 
   return (
     <Fragment>
-      {details && (
+      {!details ? (
+        <Loading />
+      ) : (
         <HeroDetails details={details} credits={credits} category={category} />
       )}
       {videos && <TrailerDetails videos={videos} />}

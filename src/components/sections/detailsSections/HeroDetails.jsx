@@ -6,8 +6,50 @@ import "react-circular-progressbar/dist/styles.css";
 import styles from "../../../styles/details-styles/details.module.css";
 import CastList from "../../../components/shared/Credits";
 import { Container, Box, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToWatchList,
+  removeFromWatchList,
+} from "../../../store/slice/watchList";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { isFavored } from "../../../utils/functions";
 
 const HeroDetails = (props) => {
+  const dispatch = useDispatch();
+  const { add, deleteRecord } = useIndexedDB("movies");
+
+  const watchList = useSelector((state) => state.watchList.list);
+
+  const isFavHandler = async (isFav, id) => {
+    if (!isFav) {
+      try {
+        await add({
+          id,
+          type: "details",
+          category: props.category,
+        });
+        dispatch(
+          addToWatchList({
+            id,
+            type: "details",
+            category: props.category,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await deleteRecord(id);
+        dispatch(removeFromWatchList(id));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  
+
   return (
     <BgDeatils details={props.details}>
       <Container
@@ -103,7 +145,7 @@ const HeroDetails = (props) => {
               flexDirection: { md: "row", xs: "column-reverse" },
             }}
           >
-            <ButtonStyled
+            {/* <ButtonStyled
               text="Watch Trailer"
               color="#fff"
               bColor="red"
@@ -113,9 +155,19 @@ const HeroDetails = (props) => {
               shadow="0px 0px 7px 8px rgba(255, 0, 0, 0.3019607843)"
               hShadow="0px 0px 20px 18px rgba(255, 0, 0, 0.3019607843)"
               colorHover="red"
-            />
+            /> */}
             <ButtonStyled
-              text="Add To Wishlist"
+              text={
+                isFavored(watchList, props.details.id)
+                  ? "Remove from WatchList"
+                  : "Add to WatchList"
+              }
+              onClick={() =>
+                isFavHandler(
+                  isFavored(watchList, props.details.id),
+                  props.details.id
+                )
+              }
               color="#fff"
               bColor="#fff"
               bghColor="red"

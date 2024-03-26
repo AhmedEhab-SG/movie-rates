@@ -9,15 +9,19 @@ const watchLishSlice = createSlice({
   initialState: INITAL_STATE,
 
   reducers: {
-    addToWatchLis: (state, action) => {
+    setWatchList: (state, action) => {
+      state.list = action.payload;
+    },
+    addToWatchList: (state, action) => {
       state.list.push(action.payload);
     },
-    removeFromWatchLis: (state, action) => {
-      state.list = state.list.filter((id) => id !== action.payload);
+    removeFromWatchList: (state, action) => {
+      state.list = state.list.filter(({ id }) => id !== action.payload);
     },
   },
 });
 
-export const { addToWatchLis, removeFromWatchLis } = watchLishSlice.actions;
+export const { addToWatchList, removeFromWatchList, setWatchList } =
+  watchLishSlice.actions;
 
 export default watchLishSlice.reducer;

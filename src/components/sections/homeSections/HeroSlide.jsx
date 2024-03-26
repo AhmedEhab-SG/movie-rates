@@ -6,9 +6,24 @@ import apiConfig from "../../../api/apiConfig";
 import Background from "../../shared/Background";
 import ButtonStyled from "../../shared/ButtonStyled";
 import { Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { useDispatch } from "react-redux";
+import {
+  addToWatchList,
+  removeFromWatchList,
+} from "../../../store/slice/watchList";
+import { isFavored } from "../../../utils/functions";
 
 const HeroSlide = () => {
   const [movieItems, setMovieItems] = useState();
+  const { add, deleteRecord } = useIndexedDB("movies");
+  const dispatch = useDispatch();
+
+  const watchList = useSelector((state) => state.watchList.list);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getHeroMovies = async () => {
@@ -26,7 +41,36 @@ const HeroSlide = () => {
     getHeroMovies();
   }, []);
 
-  movieItems && console.log(movieItems);
+  const isFavHandler = async (isFav, id) => {
+    if (!isFav) {
+      try {
+        await add({
+          id,
+          type: apiTypes.movie.popular,
+          category: apiTypes.category.movie,
+        });
+        dispatch(
+          addToWatchList({
+            id,
+            type: apiTypes.movie.popular,
+            category: apiTypes.category.movie,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await deleteRecord(id);
+        dispatch(removeFromWatchList(id));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  const navHandler = (id) =>
+    navigate(`/details/${apiTypes.category.movie}/${id}`);
 
   return (
     <Grid
@@ -49,11 +93,13 @@ const HeroSlide = () => {
                     container
                     sx={{
                       display: "flex",
+                      flexDirection: { lg: "row", xs: "column-reverse" },
                       width: "100%",
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: { lg: "0", xs: "5rem" },
                       gap: "3rem",
+                      mb: "5rem",
                     }}
                   >
                     <Grid
@@ -73,7 +119,8 @@ const HeroSlide = () => {
                       </Typography>
                       <Box sx={{ display: "flex", gap: "2rem" }}>
                         <ButtonStyled
-                          text="Watch Trailer"
+                          onClick={() => navHandler(movie.id)}
+                          text="Watch Details"
                           color="#fff"
                           bColor="red"
                           bgColor="red"
@@ -84,7 +131,17 @@ const HeroSlide = () => {
                           colorHover="red"
                         />
                         <ButtonStyled
-                          text="Add to Watchlist"
+                          text={
+                            isFavored(watchList, movie.id)
+                              ? "Remove from WatchList"
+                              : "Add to WatchList"
+                          }
+                          onClick={() =>
+                            isFavHandler(
+                              isFavored(watchList, movie.id),
+                              movie.id
+                            )
+                          }
                           color="#fff"
                           bColor="#fff"
                           bghColor="red"

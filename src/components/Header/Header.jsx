@@ -37,7 +37,6 @@ const Header = () => {
 
   const navHandler = (e) => {
     const targetText = e.target.textContent.toLowerCase();
-    console.log(targetText);
     let endpoint = "";
 
     switch (targetText) {

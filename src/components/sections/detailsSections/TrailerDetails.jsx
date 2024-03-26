@@ -1,7 +1,6 @@
 import { Container, Box } from "@mui/material";
 
 const TrailerDetails = (props) => {
-  console.log(props.videos);
   const embedYtElement = props.videos.map((video) => {
     return (
       <Box

@@ -11,10 +11,22 @@ import { Fragment, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { useSelector } from "react-redux";
+import {
+  addToWatchList,
+  removeFromWatchList,
+} from "../../store/slice/watchList";
+import { useDispatch } from "react-redux";
 
 const MovieCard = (props) => {
+  const { add, deleteRecord } = useIndexedDB("movies");
+  const dispatch = useDispatch();
   const [isHover, setIsHover] = useState(false);
-  const [isFavored, setIsFavored] = useState(false);
+  const watchList = useSelector((state) => state.watchList.list);
+  const [isFavored, setIsFavored] = useState(
+    watchList.some((item) => item.id === props.id) || false
+  );
   const ref = useRef(null);
   const navigate = useNavigate();
   const isInView = useInView(ref, { once: true });
@@ -22,6 +34,28 @@ const MovieCard = (props) => {
   const navagateHanddler = (e) => {
     if (e.target.tagName === "svg" || e.target.tagName === "path") return;
     navigate(`/details/${props.category}/${props.id}`);
+  };
+
+  const favHandler = async () => {
+    const { id, type, category } = props;
+
+    if (!isFavored) {
+      try {
+        await add({ id, type, category });
+        dispatch(addToWatchList({ id, type, category }));
+        setIsFavored(true);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await deleteRecord(id);
+        dispatch(removeFromWatchList(id));
+        setIsFavored(false);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (
@@ -133,7 +167,7 @@ const MovieCard = (props) => {
       </CardContent>
       <IconButton
         aria-label="add to favorites"
-        onClick={() => setIsFavored((prev) => !prev)}
+        onClick={favHandler}
         sx={{
           position: "absolute",
           color: isFavored ? "red" : "#fff",
