@@ -15,6 +15,7 @@ import {
   removeFromWatchList,
 } from "../../../store/slice/watchList";
 import { isFavored } from "../../../utils/functions";
+import Loading from "../../../pages/Loading";
 
 const HeroSlide = () => {
   const [movieItems, setMovieItems] = useState();
@@ -84,7 +85,7 @@ const HeroSlide = () => {
         slidesPerView={1}
         autoplay={{ delay: "4000", disableOnInteraction: false }}
       >
-        {movieItems &&
+        {movieItems ? (
           movieItems.map((movie) => {
             return (
               <SwiperSlide key={movie.id}>
@@ -164,7 +165,10 @@ const HeroSlide = () => {
                 </Background>
               </SwiperSlide>
             );
-          })}
+          })
+        ) : (
+          <Loading />
+        )}
       </Swiper>
     </Grid>
   );
