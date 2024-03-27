@@ -158,7 +158,7 @@ const HeroSlide = () => {
                           borderRadius: "30px",
                         }}
                         component="img"
-                        src={apiConfig.originalImage(movie.poster_path)}
+                        src={apiConfig.w500Image(movie.poster_path)}
                       />
                     </Grid>
                   </Grid>
