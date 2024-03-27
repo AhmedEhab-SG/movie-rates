@@ -1,4 +1,4 @@
-<!-- <div align="center"><img style="width:16%" src="./public/images/red-logo.png"/></div> -->
+<div align="center"><img style="width:16%" src="./public/images/logo.png"/></div>
 
 <h1 align="center">Movies-Watchlist</h1>
 
@@ -15,8 +15,8 @@
 » Swiper <br>
 » IndexedDb <br>
 
-<!-- Live Link: <a href="https://clothes-store-ng-not-real-site.vercel.app/">Clothes Store.ng</a> -->
+Live Link: <a href="https://movies-watchlist-idx.netlify.app/">Movies Watchlist</a>
 
-<!-- <h1 align="center" >
-<img src="./public/images/rent-home.png" alt="rent-Home">
-</h1> -->
+ <div align="center" >
+<img src="./public/images/movies-watchlist.png" alt="rent-Home">
+</div>
