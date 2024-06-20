@@ -99,8 +99,8 @@ const HeroSlide = () => {
                       justifyContent: "center",
                       alignItems: "center",
                       marginTop: { lg: "0", xs: "5rem" },
-                      gap: "3rem",
-                      mb: "5rem",
+                      gap: { lg: "3rem", xs: "0" },
+                      mb: "3rem",
                     }}
                   >
                     <Grid
@@ -109,16 +109,36 @@ const HeroSlide = () => {
                         width: { lg: "50%", xs: "95%" },
                         display: "flex",
                         flexDirection: "column",
-                        gap: "3rem",
+                        gap: { lg: "2rem", xs: "1rem" },
+                        textAlign: { lg: "left", xs: "center" },
                       }}
                     >
-                      <Typography variant="h1" sx={{ fontWeight: "500" }}>
+                      <Typography
+                        variant="h1"
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: { lg: "5rem", xs: "3rem" },
+                        }}
+                      >
                         {movie.title}
                       </Typography>
-                      <Typography variant="h5" sx={{ fontWeight: "500" }}>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          fontWeight: "500",
+                          fontSize: { lg: "1.5rem", xs: "1.2rem" },
+                        }}
+                      >
                         {movie.overview}
                       </Typography>
-                      <Box sx={{ display: "flex", gap: "2rem" }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: "2rem",
+                          width: "100%",
+                          flexDirection: { lg: "row", xs: "column" },
+                        }}
+                      >
                         <ButtonStyled
                           onClick={() => navHandler(movie.id)}
                           text="Watch Details"
@@ -130,6 +150,9 @@ const HeroSlide = () => {
                           shadow="0px 0px 7px 8px rgba(255, 0, 0, 0.3019607843)"
                           hShadow="0px 0px 20px 18px rgba(255, 0, 0, 0.3019607843)"
                           colorHover="red"
+                          sx={{
+                            width: "100%",
+                          }}
                         />
                         <ButtonStyled
                           text={
@@ -147,6 +170,9 @@ const HeroSlide = () => {
                           bColor="#fff"
                           bghColor="red"
                           bgbhColor="red"
+                          sx={{
+                            width: "100%",
+                          }}
                         />
                       </Box>
                     </Grid>

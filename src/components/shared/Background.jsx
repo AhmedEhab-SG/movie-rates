@@ -12,6 +12,7 @@ const Background = (props) => {
         position: "relative",
         minHeight: "100vh",
         display: "flex",
+        width: "100%",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
