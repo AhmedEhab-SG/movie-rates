@@ -39,6 +39,8 @@ const WatchListCard = (props) => {
       <Container
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+
           gap: "3rem",
           alignItems: "center",
           boxShadow: "0 0 10px 0 rgba(255, 255, 255, 0.1)",
@@ -66,12 +68,16 @@ const WatchListCard = (props) => {
             size={"sm"}
             fill={"red"}
           />
-          <Typography variant="body1" sx={{ maxWidth: "80%" }}>
+          <Typography
+            variant="body1"
+            sx={{ maxWidth: { xs: "100%", sm: "80%" } }}
+          >
             {movie.overview}
           </Typography>
           <Box
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
               alignItems: "center",
               mt: "1rem",
               gap: "1rem",
@@ -89,6 +95,7 @@ const WatchListCard = (props) => {
               shadow="0px 0px 7px 8px rgba(255, 0, 0, 0.3019607843)"
               hShadow="0px 0px 20px 18px rgba(255, 0, 0, 0.3019607843)"
               colorHover="red"
+              sx={{ width: { xs: "100%", sm: "auto" } }}
               onClick={navHandler}
             />
             <ButtonStyled
